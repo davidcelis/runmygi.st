@@ -1,5 +1,7 @@
 # encoding: utf-8
 require File.expand_path('../config/application', __FILE__)
+require 'fileutils'
+require 'octokit'
 require 'docker'
 
 module RunMyGist
@@ -7,10 +9,30 @@ module RunMyGist
     extend Crepe::Streaming
     respond_to :text
 
-    stream(:gist) do
-      container = Docker::Container.create('Cmd' => ['ruby', '-v'], 'Image' => 'litaio/ruby')
-      container.tap(&:start).attach { |stream, chunk| render chunk }
-      container.delete(:force => true)
+    param :username do
+      param :id do
+        stream do
+          # Create a temporary directory
+          gist_path = File.expand_path("../tmp/#{params[:username]}/#{params[:id]}", __FILE__)
+          FileUtils.mkdir_p(gist_path)
+
+          # Pull Gist info from API
+          gist = Octokit::Client.new.gist(params[:id])
+          files = gist[:files].to_h
+
+          # Write each file into the temporary directory
+          files.each do |_, file|
+            File.open("#{gist_path}/#{file[:filename]}", "w") { |f| f.write(file[:content]) }
+          end
+
+          # Copy a Dockerfile into it
+          # Build an image
+          # Create a container
+          # Run it
+          # Kill it
+          # Remove temporary directory
+        end
+      end
     end
   end
 end
