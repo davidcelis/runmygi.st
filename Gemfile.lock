@@ -25,9 +25,15 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     app (1.0.3)
+    archive-tar-minitar (0.5.2)
     clamp (0.6.3)
     coderay (1.1.0)
     diff-lcs (1.2.5)
+    docker-api (1.10.11)
+      archive-tar-minitar
+      excon (>= 0.28)
+      json
+    excon (0.33.0)
     i18n (0.6.9)
     json (1.8.1)
     method_source (0.8.2)
@@ -64,6 +70,7 @@ DEPENDENCIES
   app
   crepe!
   creperie!
+  docker-api
   pry
   puma
   rack-test

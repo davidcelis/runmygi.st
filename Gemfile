@@ -6,6 +6,8 @@ gem 'crepe', github: 'crepe/crepe'
 gem 'creperie', github: 'crepe/creperie'
 gem 'app'
 
+gem 'docker-api'
+
 # Use Jsonite to convert objects to JSON for presentation. Place
 # presenters in the app/presenters/ directory.
 #
