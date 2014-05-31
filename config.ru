@@ -22,7 +22,8 @@ module RunMyGist
 
           # Write each file into the temporary directory
           files.each do |_, file|
-            File.open("#{gist_path}/#{file[:filename]}", "w") { |f| f.write(file[:content]) }
+            filepath = "#{gist_path}/#{file[:filename]}"
+            File.open(filepath, 'w') { |f| f.write(file[:content]) }
           end
 
           # Copy a Dockerfile into it
