@@ -20,18 +20,28 @@ module RunMyGist
           gist = Octokit::Client.new.gist(params[:id])
           files = gist[:files].to_h
 
+          dockerfile = %(FROM litaio/ruby\nADD . /tmp/)
+
           # Write each file into the temporary directory
           files.each do |_, file|
             filepath = "#{gist_path}/#{file[:filename]}"
+            dockerfile += %(\nRUN ["ruby", "/tmp/#{file[:filename]}"])
             File.open(filepath, 'w') { |f| f.write(file[:content]) }
           end
 
           # Copy a Dockerfile into it
+          filepath = "#{gist_path}/Dockerfile"
+          File.open(filepath, 'w') { |f| f.write(dockerfile) }
           # Build an image
+
           # Create a container
+
           # Run it
+
           # Kill it
+
           # Remove temporary directory
+          
         end
       end
     end
