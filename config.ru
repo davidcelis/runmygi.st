@@ -52,10 +52,12 @@ module RunMyGist
 
           # Run it
           container.tap(&:start).attach { |stream, chunk| render chunk }
-          # Kill it
+          
+          # Delete it
+          container.delete(:force => true)
 
           # Remove temporary directory
-          
+          FileUtils.rm_rf(gist_path)
         end
       end
     end
