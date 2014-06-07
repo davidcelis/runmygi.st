@@ -45,11 +45,13 @@ module RunMyGist
           FileUtils.chmod 0755, filepath
 
           # Build an image
+          image = Docker::Image.build_from_dir(gist_path)
 
           # Create a container
+          container = Docker::Container.create('Image' => image.id)
 
           # Run it
-
+          container.tap(&:start).attach { |stream, chunk| render chunk }
           # Kill it
 
           # Remove temporary directory
