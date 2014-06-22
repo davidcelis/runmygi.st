@@ -35,6 +35,8 @@ module RunMyGist
               script += %(\ncd /tmp/ && javac #{file[:filename]})
               script += %(\njava #{file[:filename].gsub('.java', '')})
               script += %(\ncd -)
+            when 'JavaScript'
+              script += %(\nnode /tmp/#{file[:filename]})
             end
 
             File.open(filepath, 'w') { |f| f.write(file[:content]) }
