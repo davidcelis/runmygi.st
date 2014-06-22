@@ -9,11 +9,11 @@ GIT
 
 GIT
   remote: git://github.com/crepe/creperie.git
-  revision: ebda5f19252ebbe0241d0e8512849c845586dc6e
+  revision: 1f3e6a8fb1f35730aea46d1c837a73dfa9200c25
   specs:
     creperie (0.0.1.pre)
       clamp (~> 0.6)
-      thor (~> 0.18)
+      thor (~> 0.19)
 
 GEM
   remote: https://rubygems.org/
@@ -30,23 +30,23 @@ GEM
     clamp (0.6.3)
     coderay (1.1.0)
     diff-lcs (1.2.5)
-    docker-api (1.10.11)
+    docker-api (1.11.2)
       archive-tar-minitar
-      excon (>= 0.28)
+      excon (>= 0.37.0)
       json
-    excon (0.33.0)
+    excon (0.37.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     i18n (0.6.9)
     json (1.8.1)
     method_source (0.8.2)
-    minitest (5.3.4)
+    minitest (5.3.5)
     multipart-post (2.0.0)
-    octokit (3.1.0)
+    octokit (3.1.2)
       sawyer (~> 0.5.3)
-    pry (0.9.12.6)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
+    pry (0.10.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
       slop (~> 3.4)
     puma (2.8.2)
       rack (>= 1.1, < 2.0)
@@ -55,21 +55,25 @@ GEM
       rack (>= 1.0.0)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rspec (2.14.1)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
-    rspec-core (2.14.8)
-    rspec-expectations (2.14.5)
-      diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.6)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+    rspec-core (3.0.2)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-mocks (3.0.2)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.2)
     sawyer (0.5.4)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     slop (3.5.0)
     thor (0.19.1)
     thread_safe (0.3.4)
-    tzinfo (1.2.0)
+    tzinfo (1.2.1)
       thread_safe (~> 0.1)
 
 PLATFORMS
