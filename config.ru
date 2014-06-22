@@ -31,6 +31,10 @@ module RunMyGist
               script += %(\nruby /tmp/#{file[:filename]})
             when 'Python'
               script += %(\npython /tmp/#{file[:filename]})
+            when 'Java'
+              script += %(\ncd /tmp/ && javac #{file[:filename]})
+              script += %(\njava #{file[:filename].gsub('.java', '')})
+              script += %(\ncd -)
             end
 
             File.open(filepath, 'w') { |f| f.write(file[:content]) }

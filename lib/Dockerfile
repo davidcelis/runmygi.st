@@ -29,6 +29,14 @@ RUN apt-get update && \
 # Install Python.
 RUN apt-get install -y python python-dev python-pip
 
+# Install Java.
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:webupd8team/java && \
+    apt-get update && \
+    apt-get install -y oracle-java8-installer
+
 ADD . /tmp/
 
 CMD ["/tmp/runmygi.st"]
