@@ -26,9 +26,10 @@ module RunMyGist
           files.each do |_, file|
             filepath = "#{gist_path}/#{file[:filename]}"
 
-            if file[:language] == "Ruby"
+            case file[:language]
+            when 'Ruby'
               script += %(\nruby /tmp/#{file[:filename]})
-            elsif file[:language] == "Python"
+            when 'Python'
               script += %(\npython /tmp/#{file[:filename]})
             end
 
