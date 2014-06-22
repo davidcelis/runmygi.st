@@ -51,7 +51,7 @@ module RunMyGist
 
           # Run it
           container.tap(&:start).attach { |stream, chunk| render chunk }
-          container.wait(15)
+          container.wait(60)
 
           # Delete it
           container.delete(force: true)
