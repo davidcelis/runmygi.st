@@ -35,7 +35,7 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-s
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y oracle-java8-installer
+    apt-get install -y oracle-java7-installer
 
 # Install Node.js
 RUN \
