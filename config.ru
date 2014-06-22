@@ -20,25 +20,23 @@ module RunMyGist
           gist = Octokit::Client.new.gist(params[:id])
           files = gist[:files].to_h
 
-          dockerfile = <<-DOCKERFILE
-            FROM litaio/ruby
-            ADD . /tmp/
-
-            CMD ["/tmp/runmygi.st"]
-          DOCKERFILE
-
           script = "#!/bin/bash"
 
           # Write each file into the temporary directory
           files.each do |_, file|
             filepath = "#{gist_path}/#{file[:filename]}"
-            script += %(\nruby /tmp/#{file[:filename]})
+
+            if file[:language] == "Ruby"
+              script += %(\nruby /tmp/#{file[:filename]})
+            elsif file[:language] == "Python"
+              script += %(\npython /tmp/#{file[:filename]})
+            end
+
             File.open(filepath, 'w') { |f| f.write(file[:content]) }
           end
 
           # Copy a Dockerfile into it
-          filepath = "#{gist_path}/Dockerfile"
-          File.open(filepath, 'w') { |f| f.write(dockerfile) }
+          FileUtils.cp('lib/Dockerfile', gist_path)
 
           filepath = "#{gist_path}/runmygi.st"
           File.open(filepath, 'w') { |f| f.write(script) }
@@ -52,9 +50,10 @@ module RunMyGist
 
           # Run it
           container.tap(&:start).attach { |stream, chunk| render chunk }
-          
+          container.wait(15)
+
           # Delete it
-          container.delete(:force => true)
+          container.delete(force: true)
 
           # Remove temporary directory
           FileUtils.rm_rf(gist_path)
