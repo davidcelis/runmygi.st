@@ -1,3 +1,5 @@
+# NOTE: This image is used to run arbitrary gists in containers. The runmygi.st
+# application itself is not Dockerized.
 FROM ubuntu:14.04
 
 MAINTAINER David Celis
@@ -35,7 +37,7 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-s
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y oracle-java7-installer
+    apt-get install -y oracle-java8-installer
 
 # Install Node.js
 RUN \
@@ -50,7 +52,3 @@ RUN \
   cd /tmp && \
   rm -rf /tmp/node-v* && \
   echo '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bash_profile
-
-ADD . /tmp/
-
-CMD ["/tmp/runmygi.st"]

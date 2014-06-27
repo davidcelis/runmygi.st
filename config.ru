@@ -43,14 +43,14 @@ module RunMyGist
           end
 
           # Copy a Dockerfile into it
-          FileUtils.cp('lib/Dockerfile', gist_path)
+          File.open("#{gist_path}/Dockerfile", 'w') { |f| f.write(dockerfile) }
 
           filepath = "#{gist_path}/runmygi.st"
           File.open(filepath, 'w') { |f| f.write(script) }
           FileUtils.chmod 0755, filepath
 
           # Build an image
-          image = Docker::Image.build_from_dir(gist_path)
+          image = Docker::Image.build_from_dir(gist_path, 'rm' => true)
 
           # Create a container
           container = Docker::Container.create('Image' => image.id)
@@ -61,6 +61,7 @@ module RunMyGist
 
           # Delete it
           container.delete(force: true)
+          image.delete(force: true)
 
           # Remove temporary directory
           FileUtils.rm_rf(gist_path)
