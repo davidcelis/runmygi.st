@@ -55,9 +55,8 @@ module RunMyGist
           # Create a container
           container = Docker::Container.create('Image' => image.id)
 
-          # Run it
+          # Run it; this will time out after 60 seconds by default
           container.tap(&:start).attach { |stream, chunk| render chunk }
-          container.wait(60)
 
           # Delete it
           container.delete(force: true)
