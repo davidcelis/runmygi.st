@@ -8,7 +8,7 @@ gem 'crepe', github: 'crepe/crepe'
 gem 'creperie', github: 'crepe/creperie'
 gem 'app'
 
-gem 'docker-api'
+gem 'docker-api', github: 'swipely/docker-api'
 gem 'octokit', '~> 3.0'
 
 # Use Jsonite to convert objects to JSON for presentation. Place
