@@ -2,7 +2,6 @@
 require File.expand_path('../config/application', __FILE__)
 require 'fileutils'
 require 'octokit'
-require 'docker'
 
 module RunMyGist
   class API < BaseAPI
