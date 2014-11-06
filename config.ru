@@ -1,7 +1,5 @@
 # encoding: utf-8
 require File.expand_path('../config/application', __FILE__)
-require 'fileutils'
-require 'octokit'
 
 module RunMyGist
   class API < BaseAPI
@@ -11,20 +9,13 @@ module RunMyGist
     param :username do
       param :id do
         stream do
-          copy_gist!
+          clone_gist!
 
-          create_entry_script!
+          dockerized do |container|
+            container.attach { |_, chunk| render chunk }
+          end
 
-          image     = Docker::Image.build_from_dir(gist_path, 'rm' => true)
-          container = Docker::Container.create('Image' => image.id)
-
-          # Containers will time out after 60 seconds by default
-          container.tap(&:start).attach { |stream, chunk| render chunk }
-
-          container.delete(force: true)
-          image.delete(force: true)
-
-          FileUtils.rm_rf(gist_path)
+          delete_gist!
         end
       end
     end

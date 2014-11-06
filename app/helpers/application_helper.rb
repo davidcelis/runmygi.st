@@ -1,5 +1,8 @@
+require 'fileutils'
+require 'octokit'
+
 module ApplicationHelper
-  def copy_gist!
+  def clone_gist!
     FileUtils.mkdir_p(gist_path)
 
     # Write each file into the temporary directory
@@ -9,6 +12,12 @@ module ApplicationHelper
     end
 
     File.open("#{gist_path}/Dockerfile", 'w') { |f| f.write(dockerfile) }
+
+    create_entry_script!
+  end
+
+  def delete_gist!
+    FileUtils.rm_rf(gist_path)
   end
 
   def create_entry_script!
@@ -37,6 +46,16 @@ module ApplicationHelper
     end
 
     FileUtils.chmod(0755, filepath)
+  end
+
+  def dockerized
+    image     = Docker::Image.build_from_dir(gist_path, 'rm' => true)
+    container = Docker::Container.create('Image' => image.id)
+
+    yield container.tap(&:start)
+  ensure
+    container.delete(force: true)
+    image.delete(force: true)
   end
 
   private
