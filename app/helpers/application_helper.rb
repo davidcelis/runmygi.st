@@ -15,7 +15,8 @@ module ApplicationHelper
     filepath = "#{gist_path}/runmygi.st"
 
     unless File.exists?(filepath)
-      script = StringIO.new("#!/bin/bash\n")
+      script = File.open(filepath, 'w')
+      script.puts "#!/bin/bash\n"
 
       gist_files.each do |_, file|
         case file[:language]
@@ -32,7 +33,7 @@ module ApplicationHelper
         end
       end
 
-      File.open(filepath, 'w') { |f| f.write script }
+      script.close
     end
 
     FileUtils.chmod(0755, filepath)
