@@ -6,7 +6,7 @@ module ApplicationHelper
     FileUtils.mkdir_p(gist_path)
 
     # Write each file into the temporary directory
-    gist_files.each do |_, file|
+    gist.files.each do |_, file|
       filepath = "#{gist_path}/#{file[:filename]}"
       File.open(filepath, 'w') { |f| f.write(file[:content]) }
     end
@@ -27,7 +27,7 @@ module ApplicationHelper
       script = File.open(filepath, 'w')
       script.puts "#!/bin/bash\n"
 
-      gist_files.each do |_, file|
+      gist.files.each do |_, file|
         case file[:language]
         when 'Ruby'
           script.puts "ruby /tmp/#{file[:filename]}"
@@ -71,14 +71,10 @@ module ApplicationHelper
   end
 
   def gist_path
-    File.expand_path("../../../tmp/#{params[:username]}/#{params[:id]}", __FILE__)
+    Crepe.root.join('tmp', params[:username], params[:id])
   end
 
   def gist
-    @gist ||= Octokit::Client.new.gist(params[:id])
-  end
-
-  def gist_files
-    @gist_files ||= gist[:files].to_h
+    @gist ||= Gist.new(params[:id])
   end
 end
