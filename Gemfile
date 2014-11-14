@@ -1,7 +1,7 @@
 # A sample Gemfile
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.1.5'
 
 # Bundle from GitHub, as only a prerelease is currently available.
 gem 'crepe',    github: 'crepe/crepe'

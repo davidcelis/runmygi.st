@@ -35,7 +35,7 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set :keep_releases, 5
 
 # Set the Ruby that chruby will use
-set :chruby_ruby, 'ruby-2.1.4'
+set :chruby_ruby, 'ruby-2.1.5'
 
 namespace :deploy do
   desc 'Start application'
