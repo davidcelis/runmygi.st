@@ -66,3 +66,16 @@ namespace :deploy do
     end
   end
 end
+
+namespace :docker do
+  desc 'Build the latest Docker image'
+  task :build do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :docker, :build, './'
+      end
+    end
+  end
+
+  after 'deploy:publishing', 'docker:build'
+end
