@@ -1,6 +1,6 @@
 # NOTE: This image is used to run arbitrary gists in containers. The runmygi.st
 # application itself is not Dockerized.
-FROM ubuntu:14.04
+FROM ubuntu:14.10
 
 MAINTAINER David Celis
 
