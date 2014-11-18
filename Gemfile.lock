@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/crepe/creperie.git
-  revision: a03aa65f80369035c867cae0d05f4533965c6609
+  revision: d41a877b6120c405c533ec6b35fd15c91baeab74
   specs:
     creperie (0.0.1.pre)
       clamp (~> 0.6)
@@ -21,7 +21,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.1.7)
+    activesupport (4.1.8)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -49,7 +49,7 @@ GEM
     coderay (1.1.0)
     colorize (0.7.3)
     diff-lcs (1.2.5)
-    docker-api (1.14.0)
+    docker-api (1.15.0)
       archive-tar-minitar
       excon (>= 0.38.0)
       json
@@ -60,12 +60,12 @@ GEM
     hitimes (1.2.2)
     i18n (0.6.11)
     json (1.8.1)
-    listen (2.7.11)
+    listen (2.8.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     method_source (0.8.2)
-    minitest (5.4.2)
+    minitest (5.4.3)
     multipart-post (2.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
