@@ -69,13 +69,13 @@ end
 
 namespace :docker do
   desc 'Build the latest Docker image'
-  task :build do
+  task :pull do
     on roles(:app), in: :sequence, wait: 5 do
       within release_path do
-        execute :docker, :build, '--rm', './'
+        execute :docker, :pull, 'davidcelis/runmygi.st'
       end
     end
   end
 
-  after 'deploy:updating', 'docker:build'
+  after 'deploy:updating', 'docker:pull'
 end
