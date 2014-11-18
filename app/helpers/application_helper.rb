@@ -36,7 +36,7 @@ module ApplicationHelper
         when 'Java'
           script.puts "cd /tmp/ && javac #{file[:filename]}"
           script.puts "java #{file[:filename].gsub('.java', '')}"
-          script.puts "cd -"
+          script.puts "cd - > /dev/null 2>&1"
         when 'JavaScript'
           script.puts "node /tmp/#{file[:filename]}"
         end
