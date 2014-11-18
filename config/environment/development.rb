@@ -7,6 +7,7 @@ RunMyGist::Application.configure do
   Docker.options[:client_cert] = File.join(cert_path, 'cert.pem')
   Docker.options[:client_key]  = File.join(cert_path, 'key.pem')
   Docker.options[:ssl_ca_file] = File.join(cert_path, 'ca.pem')
+  Docker.options[:chunk_size]  = 1
 
   Docker.options[:scheme] = 'https'
 end
