@@ -77,5 +77,5 @@ namespace :docker do
     end
   end
 
-  after 'deploy:publishing', 'docker:build'
+  after 'deploy:updating', 'docker:build'
 end
