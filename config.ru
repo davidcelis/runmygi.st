@@ -19,6 +19,10 @@ module RunMyGist
         end
       end
     end
+
+    rescue_from Octokit::NotFound do |e|
+      error! :not_found, e.message
+    end
   end
 end
 
