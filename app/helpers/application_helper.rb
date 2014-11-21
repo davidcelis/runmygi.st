@@ -75,6 +75,10 @@ module ApplicationHelper
   end
 
   def gist
-    @gist ||= Gist.new(params[:id])
+    @gist ||= begin
+      endpoint = request.headers['GitHub-URL'] if request.headers['GitHub-URL']
+      token    = request.headers['Authorization'].sub(/token /i, '') if request.headers['Authorization']
+      Gist.new(params[:id], github_url: endpoint, access_token: token)
+    end
   end
 end

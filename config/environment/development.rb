@@ -1,6 +1,6 @@
 # Settings specified here will take precedence over those in config/application.rb
 RunMyGist::Application.configure do
-  config.log_level = :debug
+  config.log_level = Logger::DEBUG
 
   cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
 
